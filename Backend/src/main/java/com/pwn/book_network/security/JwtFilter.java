@@ -5,20 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
-
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
@@ -30,15 +25,15 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-           @NotNull HttpServletRequest request,
-           @NotNull HttpServletResponse response,
-           @NotNull FilterChain filterChain
+          @NotNull HttpServletRequest request,
+          @NotNull HttpServletResponse response,
+          @NotNull FilterChain filterChain
     ) throws ServletException, IOException {
         if(request.getServletPath().contains("/api/v1/auth")){
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
             return;
         }
-        final String authHeader = request.getHeader(AUTHORIZATION);
+        final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
         if(authHeader==null || !authHeader.startsWith("Bearer ")){
