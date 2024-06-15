@@ -26,7 +26,7 @@ public class Roles {
 
 
     @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
+    @JsonIgnore //Prevent serialization when fetched as the related User class fetches data Eagerly
     private List<User> users;
 
     @CreatedDate

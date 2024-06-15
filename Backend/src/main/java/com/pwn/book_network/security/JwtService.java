@@ -17,7 +17,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtService { /*
+                                this service will
+                                1) Generate the token
+                                2) Decode the token
+                                3) Extract information from the token
+                                4) Validate the token
+
+*/
 
     @Value("${application.security.jwt.secret-key: application.properties-dev.yml}")
     private String secretKey ;
@@ -25,11 +32,13 @@ public class JwtService {
     private long jwtExpiration ;
 
 
+    //Generating token
+
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    private String generateToken(Map<String, Object> claims, UserDetails userDetails){
+    public String generateToken(Map<String, Object> claims, UserDetails userDetails){
 
         return buildToken(claims, userDetails, jwtExpiration);
     }
@@ -59,6 +68,9 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+
+    // Extracting data from a token
+
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
@@ -80,6 +92,7 @@ public class JwtService {
 
 
 
+    // Check the Validity of the given token
 
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username= extractUsername(token);

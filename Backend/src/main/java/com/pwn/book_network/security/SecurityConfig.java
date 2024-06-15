@@ -1,7 +1,6 @@
 package com.pwn.book_network.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,15 +21,14 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig {
 
     private final JwtFilter jwtAuthFilter;
-    private final AuthenticationProvider authenticationProvider;
+    private final AuthenticationProvider authenticationProvider; // need to create a bean of this type in BeansConfig class
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http
-                .cors(withDefaults())
+        http.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->req.requestMatchers(
-                        "/auth/**",
+                        "/auth/**", // contains login, register, and validation pages
                         "/v2/api-docs",
                         "v3/api-docs",
                         "v3/api-docs/**",
@@ -41,10 +39,13 @@ public class SecurityConfig {
                         "/swagger-ui/**",
                         "/webjars/**",
                         "/swagger-ui.html"
-                ).permitAll().anyRequest().authenticated()
-                   ).sessionManagement(s->s.sessionCreationPolicy(STATELESS))
+                ).permitAll() //allow all above request and authenticate all other requests
+                                .anyRequest()
+                                .authenticated()
+                   ).sessionManagement(s->s.sessionCreationPolicy(STATELESS)) // spring should not store session state - check every time
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                  // list of filters including the custom filter (jwtAuthFilter)
         return http.build();
     }
 }

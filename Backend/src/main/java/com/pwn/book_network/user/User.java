@@ -21,9 +21,11 @@ import java.util.stream.Collectors;
 @Entity
 @Data
 @Table(name="_User")
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class) //Auditing is enabled - audit logging / tracking changes in DB entity
 public class User implements UserDetails, Principal {
 
+    //implement UserDetails to load specific user data during authentication below mentioned @Override methods except getAuthorities
+    //implement Principal to implement classes with possible future updates, and to extend the behaviour class itself don't need to be changed
     @Id
     @GeneratedValue
     private Integer id;
@@ -36,7 +38,7 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER) // All related data will be fetched
     private List<Roles> roles;
 
     @CreatedDate
@@ -47,12 +49,14 @@ public class User implements UserDetails, Principal {
     private LocalDateTime lastModifiedDate;
 
 
+    /* retrieves a collection of SimpleGrantedAuthority objects that represent user's authorities by mapping each role
+     in the user's roles collection to SimpleGrantedAuthority instance */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles
-                .stream()
-                .map(r->new SimpleGrantedAuthority(r.getName()))
-                .collect(Collectors.toList());
+                .stream() //stream of roles collection - access to elements without iterating
+                .map(r ->new SimpleGrantedAuthority(r.getName())) //creates SimpleGrantedAuthority object for each role
+                .collect(Collectors.toList()); //terminates the stream and convert the processed element to a collection(list)
     }
 
     @Override
@@ -90,7 +94,7 @@ public class User implements UserDetails, Principal {
         return email;
     }
 
-    private String fullName(){
+    public String fullName(){
         return firstName+ " " + lastName;
     }
 
