@@ -1,14 +1,12 @@
 package com.pwn.book_network.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +21,9 @@ public class Token {
     private LocalDateTime expiresAt;
     private LocalDateTime validatedAt;
 
+    //User can have many tokens - UNI Directional Relationship
     @ManyToOne
-    @JoinColumn(name = "userID",nullable = false)
+    @JoinColumn(name = "userID",nullable = false) // creates a new column in Token table which takes user table's Id as the foreign key
     private User user;
 
 

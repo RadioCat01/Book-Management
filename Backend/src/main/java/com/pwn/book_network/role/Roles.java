@@ -14,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Roles {
 
@@ -25,10 +26,12 @@ public class Roles {
     private String name;
 
 
+    //A single role can have many users
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore //Prevent serialization when fetched as the related User class fetches data Eagerly
     private List<User> users;
 
+    //Auditing
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;

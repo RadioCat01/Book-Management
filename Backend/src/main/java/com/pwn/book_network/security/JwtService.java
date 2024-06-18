@@ -5,8 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -32,8 +30,7 @@ public class JwtService { /*
     private long jwtExpiration ;
 
 
-    //Generating token
-
+    //Generating JWT token
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(), userDetails);
     }
@@ -69,6 +66,27 @@ public class JwtService { /*
     }
 
 
+
+
+
+
+    // Check the Validity of the given token
+
+    public boolean isTokenValid(String token, UserDetails userDetails){
+        final String username= extractUsername(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token){
+        return extractExpiration(token).before(new Date());
+    }
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+
+
     // Extracting data from a token
 
     public String extractUsername(String token){
@@ -89,23 +107,6 @@ public class JwtService { /*
                 .getBody();
     }
 
-
-
-
-    // Check the Validity of the given token
-
-    public boolean isTokenValid(String token, UserDetails userDetails){
-        final String username= extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    private boolean isTokenExpired(String token){
-        return extractExpiration(token).before(new Date());
-    }
-
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
 
 
 }

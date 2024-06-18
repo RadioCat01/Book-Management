@@ -14,7 +14,7 @@ import com.pwn.book_network.role.*;
 import javax.management.relation.Role;
 
 @SpringBootApplication
-@EnableJpaAuditing  // enable Auditing Mechanisms
+@EnableJpaAuditing(auditorAwareRef = "auditorAware") // enable Auditing Mechanisms with the bean --> which enables auditing by userId
 @EnableConfigurationProperties
 @EnableAsync
 public class BookNetworkApplication {

@@ -57,7 +57,7 @@ public class AuthenticationService {
     private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user); //call method
 
-        // implement the email service, send emil with configured user detais template and generated token
+        // implement the email service, send emil with configured user details template and generated token
         emailService.sendEmail(
                 user.getEmail(),
                 user.fullName(),
@@ -113,13 +113,17 @@ public class AuthenticationService {
                 )
         );
         // after authentication is successful
-        var claims = new HashMap<String, Object>();
+        var claims = new HashMap<String, Object>(); /* Claims are key value pairs that represent information about user or other data that should include in JWT token
+        this includes timestamps for expiration and issuedAt to control the valid time period of the token
+        */
         var user = ((User)auth.getPrincipal()); // case authentication to user that's why the User class implemented " Principal "
-        claims.put("fullname", user.fullName());
+        claims.put("fullName", user.fullName());
 
         // Now create a new JWT token
         var jwtToken = jwtService.generateToken(claims, user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
 
 

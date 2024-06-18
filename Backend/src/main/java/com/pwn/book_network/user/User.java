@@ -1,5 +1,7 @@
 package com.pwn.book_network.user;
 
+import com.pwn.book_network.book.Book;
+import com.pwn.book_network.history.BookTransactionHistory;
 import com.pwn.book_network.role.Roles;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +21,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name="_User")
 @EntityListeners(AuditingEntityListener.class) //Auditing is enabled - audit logging / tracking changes in DB entity
 public class User implements UserDetails, Principal {
@@ -38,17 +41,40 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
+
+    //Relations
+    // User can have many roles
     @ManyToMany(fetch = FetchType.EAGER) // All related data will be fetched
     private List<Roles> roles;
 
-    @CreatedDate
+
+    // One User has many books
+    @OneToMany(mappedBy = "owner")// necessary
+    private List<Book> books;
+
+
+    // One user can have many transaction histories
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
+
+
+
+
+
+
+    //Editing entities
+    @CreatedDate // set as needs to Audited Automatically
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
+
     @CreatedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
 
+
+
+    //Security
     /* retrieves a collection of SimpleGrantedAuthority objects that represent user's authorities by mapping each role
      in the user's roles collection to SimpleGrantedAuthority instance */
     @Override
