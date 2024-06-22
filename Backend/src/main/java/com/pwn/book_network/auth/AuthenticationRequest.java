@@ -11,12 +11,12 @@ import lombok.Data;
 @Builder
 public class AuthenticationRequest { //type of authentication / login request
 
-    @NotEmpty(message = "Firstname is required")
-    @NotBlank(message = "Fill this")
+    @NotEmpty(message = "Email is required")
+    @NotBlank(message = "Field should not be Empty")
     @Email(message = "invalid")
     private String email;
-    @NotEmpty(message = "Firstname is required")
-    @NotBlank(message = "Fill this")
+    @NotEmpty(message = "Password is required")
+    @NotBlank(message = "Field should not be Empty")
     @Size(min=8, message = "Use 8 char")
     private String password;
 

@@ -31,7 +31,7 @@ public class BaseEntity {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false, updatable = false)
+    @Column( nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdDate;
 

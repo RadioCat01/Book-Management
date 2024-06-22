@@ -3,6 +3,7 @@ package com.pwn.book_network.handler;
 import com.pwn.book_network.exception.OperationProhibitted;
 import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -75,10 +76,12 @@ public class GlobalExceptionHandler {
                 });
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(
                         ExceptionResponse.builder()
                                 .validationErrors(errors)
-                                .build());}
+                                .build());
+    }
 
     //Non-specific exception
     @ExceptionHandler(Exception.class)

@@ -9,8 +9,6 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
 
 @OpenAPIDefinition(
         info = @Info(
@@ -24,7 +22,8 @@ import org.springframework.stereotype.Service;
                 license = @License(
                         name = "Licence name",
                         url = "anywhere"
-                )
+                ),
+                termsOfService = "Some Terms"
         ),
         servers = {
                 @Server(

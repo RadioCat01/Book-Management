@@ -18,7 +18,7 @@ public class BookResponse { // this is the structure of book response
     private String isbn;
     private String synopsis;
     private String owner;
-    private byte[] cover; //implemented
+    private String cover; //implemented
     private double rate; // average of all the feedbacks multiplied by number of feedbacks --> @Transient annotated method in Book class
     private boolean archived;
     private boolean shareable;
