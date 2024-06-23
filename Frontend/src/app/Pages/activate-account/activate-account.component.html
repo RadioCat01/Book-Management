@@ -1,3 +1,5 @@
+<div class="main">
+  <div class="cont">
 <div class="container" *ngIf="submitted else codeForm">
     <div class="activation-message" *ngIf="isOkay; else activationError">
       <h2>Activation Successful!</h2>
@@ -16,7 +18,7 @@
   <ng-template #codeForm>
     <div class="container">
       <div class="text-center" style="width: 400px;">
-        <h2>Type your activation code</h2>
+        <h2>Activation Code</h2>
         <code-input [isCodeHidden]="false"
                     [codeLength]="6"
                     [code]="'number'"
@@ -26,3 +28,5 @@
       </div>
     </div>
   </ng-template>
+  </div>
+  </div>

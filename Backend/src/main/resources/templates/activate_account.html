@@ -20,7 +20,11 @@ this is the template returns when ACTIVATE_ACCOUNT template is requested
           padding: 20px;
           background-color: #fff
           border-radious: 5px;
-          box-shadow: 0 0 10px rgba(0,0,0,0.1)
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items:center;
         }
         .activation-code{
         font-size: 36px;
@@ -31,26 +35,31 @@ this is the template returns when ACTIVATE_ACCOUNT template is requested
         display: block;
         text-align: center;
         margin-top: 20px
+        width: 60px;
+        height:40px;
         }
         .link{
-        display: inline-block;
-        padding 10px 20px;
+        display: flex;
+
         background-color: #007bff;
         color: #fff;
         text-decoration: none;
         border-radius: 5px;
-        height: 20px;
+        height: 40px;
+        width: 200px;
+        justify-content: center;
+        align-items:center;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Account Activation</h1>
-    <p class="greeting" th:text="'Hello' + ${username} + ','"></p>
-    <p>Thank you for signingup use code to activate !</p>
+    <p class="greeting" th:text="'Hello' + ' ' + ${username} + '!'"></p>
+    <p>Thank you for signing up, use code to activate your account !</p>
     <div class="activation-code"><span th:text="${activationCode}"></span></div>
     <div class="activation-link">
-        <a class="link" th:href="${confirmationURL}" target="_blank">Activate your account !</a>
+        <a class="link" th:href="${confirmationURL}" target="_blank">Activate account !</a>
     </div>
 </div>
 </body>

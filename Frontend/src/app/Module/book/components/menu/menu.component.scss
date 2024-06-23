@@ -9,3 +9,22 @@ li > a {
       border-radius: 5px;
     }
   }
+  a{
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .nav{
+    height: 100px;
+    background: #404040;
+    color: #404040;
+  }
+  form{
+    position: absolute;
+    right: 0px;
+  }
+  .logout{
+    width: 200px;
+    border: 2px solid rgb(79, 102, 247);
+    border-radius: 15px;
+  }

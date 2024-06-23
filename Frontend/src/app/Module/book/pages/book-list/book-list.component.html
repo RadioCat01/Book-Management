@@ -1,4 +1,8 @@
+
+<div class="comp">
+  <hr>
 <h3>Books list</h3>
+<hr class="hr1">
 <div
   *ngIf="message"
   class="alert "
@@ -8,8 +12,8 @@
 >
   <p>{{message}}</p>
 </div>
-<hr>
-<div class="d-flex justify-content-start gap-2 flex-wrap">
+
+<div class="d-flex justify-content-start gap-2 flex-wrap book-area scroller">
   <app-book-card
     *ngFor="let book of bookResponse.content"
     [book]="book"

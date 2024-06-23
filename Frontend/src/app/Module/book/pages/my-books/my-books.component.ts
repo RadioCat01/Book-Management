@@ -4,6 +4,7 @@ import { BookService } from '../../../../Services/services';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
+import { ManageBookComponent } from '../manage-book/manage-book.component';
 
 @Component({
   selector: 'app-my-books',
@@ -11,7 +12,8 @@ import { BookCardComponent } from '../../components/book-card/book-card.componen
   imports: [
     CommonModule,
     BookCardComponent,
-    RouterLink
+    RouterLink,
+    ManageBookComponent
   ],
   providers: [
     BookService,

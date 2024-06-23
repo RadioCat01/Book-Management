@@ -1,6 +1,7 @@
-<h2>My borrowed books</h2>
 <hr>
-<div class="d-flex flex-column col-6" *ngIf="selectedBook">
+<h3>My borrowed books</h3>
+<hr>
+<div class="d-flex flex-column col-6 ret" *ngIf="selectedBook">
   <h2>Return and share feedback</h2>
   <div class="d-flex flex-column col-12">
     <div class="d-flex">
@@ -57,9 +58,7 @@
         <button (click)="returnBook(false)" type="submit" class="btn btn-outline-success">
           <i class="fa-solid fa-paper-plane"></i>&nbsp;Just Return
         </button>
-        <a routerLink="/books/my-books" type="submit" class="btn btn-link btn text-danger">
-          <i class="fas fa-times"></i>&nbsp;Cancel
-        </a>
+        
       </div>
     </form>
   </div>
@@ -94,7 +93,7 @@
     </tr>
     </tbody>
   </table>
-  <div class="d-flex justify-content-center mt-3">
+  <div class="d-flex justify-content-center mt-3 scroller">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item">

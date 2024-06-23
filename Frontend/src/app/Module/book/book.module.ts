@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookRoutingModule } from './book-routing.module';
 import { MainComponent } from './pages/main/main.component';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpTokenInterceptor } from '../../Services/interceptor/http-token.interceptor';
@@ -25,6 +25,7 @@ import { MyBooksComponent } from './pages/my-books/my-books.component';
     BookCardComponent,
     BookListComponent,
     MyBooksComponent,
+    RouterLink
   ],
   providers:[
     HttpClient,

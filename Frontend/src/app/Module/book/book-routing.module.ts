@@ -10,9 +10,10 @@ import { audit } from 'rxjs';
 import { authGuard } from '../../Services/Guard/auth.guard';
 const routes: Routes = [
   {
-    path: '' , component: MainComponent,
+    path: '' , 
+    component: MainComponent,
     canActivate: [authGuard],
-    children: [
+  },
       {
         path: '', 
         component: BookListComponent,
@@ -47,9 +48,7 @@ const routes: Routes = [
         path: 'my-returned-books', 
         component: ReturnedBookComponent,
         canActivate: [authGuard],
-      }
-    ]
-  }
+      }  
 ];
 
 @NgModule({

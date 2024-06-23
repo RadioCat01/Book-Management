@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BookRequest } from '../../../../Services/models/book-request';
 import { BookService } from '../../../../Services/services/book.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLink } from '@angular/router';
 import { BookResponse } from '../../../../Services/models';
 
 
@@ -13,6 +13,7 @@ import { BookResponse } from '../../../../Services/models';
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink
   ],
   providers:[
     BookService

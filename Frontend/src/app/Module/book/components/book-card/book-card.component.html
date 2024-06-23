@@ -1,3 +1,47 @@
+<div class="card"
+[class.border-success]="book.shareable"
+[class.border-warning]="book.archived">
+<div class="card-container">
+  <a href="/" class="hero-image-container">
+    <img class="hero-image" [src]="bookCover" alt="Spinning glass cube"/>
+  </a>
+  <main class="main-content">
+    <h1>{{book.title}}</h1>
+   
+    <p class="syn">{{book.synopsis}}</p>
+    <p>Owner :  {{ book.owner }}</p>
+    <div class="flex-row">
+      <div class="d-flex gap-2 star">
+        <app-rating [rating]="book.rate || 0"></app-rating>
+        <span class="fw-bold" *ngIf="book.rate || 0 > 0">
+          {{book.rate}}
+        </span>
+      </div>
+      <div class="time-left">
+        <div class="d-flex gap-2" *ngIf="manage">
+          <i (click)="onEdit()" class="fas fa-edit text-success"></i>
+          <i (click)="onShare()" class="fas fa-share-nodes text-primary"></i>
+          <i (click)="onArchive()" class="fas fa-archive text-danger"></i>
+        </div>
+        <div class="d-flex gap-2" *ngIf="!manage">
+          <i (click)="onShowDetails()" class="fas fa-circle-info text-primary"></i>
+          <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="card-attribute">
+    <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar"/>
+    <p>Author <span>{{ book.authorName }}</span></p>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<!--
 <div
   class="card"
   style="width: 20rem;"
@@ -23,7 +67,6 @@
     <div class="d-flex gap-2" *ngIf="!manage">
       <i (click)="onShowDetails()" class="fas fa-circle-info text-primary"></i>
       <i (click)="onBorrow()" class="fas fa-list-check text-primary"></i>
-      <i (click)="onAddToWaitingList()" class="fas fa-heart text-danger"></i>
     </div>
     <div class="d-flex gap-2" *ngIf="manage">
       <i (click)="onEdit()" class="fas fa-edit text-success"></i>
@@ -31,4 +74,4 @@
       <i (click)="onArchive()" class="fas fa-archive text-danger"></i>
     </div>
   </div>
-</div>
+</div> -->
