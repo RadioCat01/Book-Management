@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class BookListComponent implements OnInit {
   bookResponse: PageResponseBookResponse = {};
   page = 0;
-  size = 5;
+  size = 4;
   pages: any = [];
   message = '';
   level: 'success' |'error' = 'success';

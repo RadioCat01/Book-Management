@@ -17,14 +17,29 @@
     --var-para: normal normal 300 1em/1.55em 'Outfit', sans-serif;
 }
 
-.card{
-   
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-    width: 305px;
-   background:  #181818;
-}
+
+.border-animated-shareable {
+    border: 3px solid green;
+    animation: pulseShareable 2s infinite;
+  }
+  
+  .border-animated-archived {
+    border: 3px solid orange;
+    animation: pulseArchived 2s infinite;
+  }
+  
+  @keyframes pulseShareable {
+    0% { border-color: green; }
+    50% { border-color: lightgreen; }
+    100% { border-color: green; }
+  }
+  
+  @keyframes pulseArchived {
+    0% { border-color: orange; }
+    50% { border-color: lightorange; }
+    100% { border-color: orange; }
+  }
+
 
 *, *::before, *::after {
     box-sizing: inherit;
@@ -67,8 +82,7 @@ span {
     color: white;
 }
 .card-container {
-    width: 100%;
-    max-width: 300px;
+    width: 310px;
     margin: 2em auto;
     background-color: var(--var-card-dark);
     border-radius: 15px;
@@ -82,7 +96,9 @@ span {
     margin-top: -15px;
 }
 .syn{
-    height: 70px;
+    height: 80px;
+    margin-top: -30px;
+    margin-bottom: 10px;
 }
 
 div.flex-row {

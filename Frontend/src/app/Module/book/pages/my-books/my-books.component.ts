@@ -24,7 +24,7 @@ import { ManageBookComponent } from '../manage-book/manage-book.component';
 export class MyBooksComponent implements OnInit {
   bookResponse: PageResponseBookResponse = {};
   page = 0;
-  size = 5;
+  size = 4;
   pages: any = [];
 
   constructor(

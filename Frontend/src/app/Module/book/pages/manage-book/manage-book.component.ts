@@ -60,7 +60,7 @@ export class ManageBookComponent implements OnInit {
           }
         }).subscribe({
           next: (): void => {
-            this.router.navigate(['/books/my-books']);
+            this.router.navigate(['/books']);
           }
         })
       },

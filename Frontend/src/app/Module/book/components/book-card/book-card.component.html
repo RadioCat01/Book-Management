@@ -1,7 +1,4 @@
-<div class="card"
-[class.border-success]="book.shareable"
-[class.border-warning]="book.archived">
-<div class="card-container">
+<div class="card-container"[ngClass]="{'border-animated-shareable': book.shareable, 'border-animated-archived': book.archived}" > 
   <a href="/" class="hero-image-container">
     <img class="hero-image" [src]="bookCover" alt="Spinning glass cube"/>
   </a>
@@ -35,8 +32,6 @@
     <p>Author <span>{{ book.authorName }}</span></p>
   </div>
 </div>
-</div>
-
 
 
 

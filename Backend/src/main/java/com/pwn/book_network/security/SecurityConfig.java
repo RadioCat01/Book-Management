@@ -27,8 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req->req.requestMatchers(
-                        "/auth/**", // contains login, register, and validation pages
+                .authorizeHttpRequests
+                        (
+                         req->req.requestMatchers(
+               "/auth/**", // contains login, register, and validation pages
                         "/v2/api-docs",
                         "v3/api-docs",
                         "v3/api-docs/**",
@@ -38,11 +40,12 @@ public class SecurityConfig {
                         "/configuration/security",
                         "/swagger-ui/**",
                         "/webjars/**",
-                        "/swagger-ui.html"
-                ).permitAll() //allow all above request and authenticate all other requests
+                        "/swagger-ui.html")
+                                .permitAll()
                                 .anyRequest()
                                 .authenticated()
-                   ).sessionManagement(s->s.sessionCreationPolicy(STATELESS)) // spring should not store session state - check every time
+                        )
+                .sessionManagement(s->s.sessionCreationPolicy(STATELESS)) // spring should not store session state - check every time
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
                   // list of filters including the custom filter (jwtAuthFilter)

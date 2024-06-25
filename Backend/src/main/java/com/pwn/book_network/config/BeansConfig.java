@@ -32,7 +32,7 @@ public class BeansConfig {
     public AuthenticationProvider authenticationProvider(){ //creating a bean of type authentication provider,
         // **compare passwords
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService); // retrieve user details
+        authProvider.setUserDetailsService(userDetailsService);// retrieve user details
         authProvider.setPasswordEncoder(passwordEncoder()); // store passwords after encoded
         return authProvider;
     }

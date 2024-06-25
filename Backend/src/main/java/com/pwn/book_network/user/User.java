@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
-@Table(name="_User")
+@Table(name = "_User")
 @EntityListeners(AuditingEntityListener.class) //Auditing is enabled - audit logging / tracking changes in DB entity
 public class User implements UserDetails, Principal {
 
