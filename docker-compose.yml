@@ -14,6 +14,7 @@ services:
     networks:
       - spring-demo
     restart: unless-stopped
+
   mail-dev:
     container_name: mail-dev-bsn
     image: maildev/maildev

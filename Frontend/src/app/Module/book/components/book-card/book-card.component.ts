@@ -8,8 +8,7 @@ import { RatingComponent } from '../rating/rating.component';
   standalone: true,
   imports: [
     CommonModule,
-    RatingComponent,
-    
+    RatingComponent,  
   ],
   providers:[
     
