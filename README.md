@@ -1,3 +1,5 @@
+Personalized Book management system built with Spring Boot
+
 Security
 
   - securityFilterChain - (bean) accepts object of type HttpSecurity
