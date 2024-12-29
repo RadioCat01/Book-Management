@@ -60,7 +60,7 @@ Security
          - Session Management: Configured to use STATELESS session management, ensuring Spring Security does not create or store session information, relying entirely on JWT tokens for authentication.
                -  The JwtFilter intercepts requests to extract and validate JWT tokens.
                - If valid, it sets up the authentication context using SecurityContextHolder.
-               - If not valid or absent, authentication falls back to the configured AuthenticationProvider (DaoAuthenticationProvider), which handles traditional username-password authentication.
+               - If not valid or absent, authentication falls back to the configured AuthenticationProvider (DaoAuthenticationProvider), which handles traditional username-password authentication..
 
 
 
