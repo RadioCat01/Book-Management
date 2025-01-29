@@ -15,6 +15,18 @@ services:
       - spring-demo
     restart: unless-stopped
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pwnkanishka@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 123456789
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
   mail-dev:
     container_name: mail-dev-bsn
     image: maildev/maildev
@@ -27,5 +39,6 @@ networks:
     driver: bridge
 
 volumes:
+  pgadmin-data:
   postgres:
     driver: local

@@ -5,6 +5,7 @@ import com.pwn.book_network.exception.OperationProhibitted;
 import com.pwn.book_network.file.FileStorageService;
 import com.pwn.book_network.history.BookTransactionHistory;
 import com.pwn.book_network.history.BookTransactionHistoryRepository;
+import com.pwn.book_network.role.Roles;
 import com.pwn.book_network.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -31,9 +32,17 @@ public class BookService {
 
     public Integer save(BookRequest request, Authentication connectedUser){
         User user = ((User) connectedUser.getPrincipal()); // User connected user to extract userId
-        Book book = bookMapper.toBook(request); // this mapper is used to create a new Book object and map data in the request with the book details
-        book.setOwner(user); // set the book owner
-        return bookRepository.save(book).getId(); // save the book in BookRepository
+
+        List<Roles> roles = user.getRoles();
+
+        boolean isAdmin = roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
+
+        if(isAdmin){
+            Book book = bookMapper.toBook(request); // this mapper is used to create a new Book object and map data in the request with the book details
+            book.setOwner(user); // set the book owner
+            return bookRepository.save(book).getId(); // save the book in BookRepository
+        }
+        return null;
     }
 
     public BookResponse findById(Integer bookId) {                    // here call the bookRepository to find the book and then map it into a new bookResponse object and return it

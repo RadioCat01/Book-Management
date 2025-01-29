@@ -57,11 +57,6 @@ public class User implements UserDetails, Principal {
     @OneToMany(mappedBy = "user")
     private List<BookTransactionHistory> histories;
 
-
-
-
-
-
     //Editing entities
     @CreatedDate // set as needs to Audited Automatically
     @Column(nullable = false, updatable = false)
