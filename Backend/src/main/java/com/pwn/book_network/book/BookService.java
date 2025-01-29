@@ -15,9 +15,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,11 +34,15 @@ public class BookService {
     private final FileStorageService fileStorageService;
 
     public Integer save(BookRequest request, Authentication connectedUser){
-        User user = ((User) connectedUser.getPrincipal()); // User connected user to extract userId
+        User user = (User) connectedUser.getPrincipal(); // User connected user to extract userId
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<GrantedAuthority> authorities = (List<GrantedAuthority>) connectedUser.getAuthorities(); // Get role directly from authentication object
+        boolean isAdmin = authorities.stream().anyMatch(role->role.getAuthority().equals("ROLE_ADMIN"));
 
         List<Roles> roles = user.getRoles();
 
-        boolean isAdmin = roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));
+        boolean isAdmin2 = roles.stream().anyMatch(role -> role.getName().equals("ADMIN"));// Get authority directly from user object
 
         if(isAdmin){
             Book book = bookMapper.toBook(request); // this mapper is used to create a new Book object and map data in the request with the book details
